@@ -7,4 +7,4 @@ if( Month > 3):
     print ( 2018 - Age - 1)
 else:
     print (2018 - Age)
-print ("GOODBIE")
+
