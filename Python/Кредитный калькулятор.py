@@ -1,0 +1,6 @@
+age = int(input("Введите на сколько лет кредит "))
+Nominal = int(input("Введите сумму кредита "))
+Percent = int(input("Введите процентную ставку "))
+StartNominal = int(input("Введите начальную сумму "))
+EndNominal = int( (age * Nominal) + ((age * Nominal) * (Percent / 100)) - StartNominal)
+print (EndNominal / age)
