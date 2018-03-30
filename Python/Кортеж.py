@@ -1,3 +1,9 @@
-Numbers = list(range (1 , 25 + 1))
-NumberTuple = tuple(Numbers)
-print(NumberTuple)
+def tuple():
+    salat = ("Картофель",
+             "лук",
+             "колбаса",
+             "мойнез",
+             "соленые огурцы",
+             "морковь")
+    print (salat)
+tuple()
