@@ -1,3 +1,9 @@
+
+
+#Подключаем библиотеку для работы с логами
+import logging
+#Подключаем библиотеку для работы с базами данных
+import sqlite3
 # Подключаем конфиг с той же папки 
 import config
 # Подключаем библиотеку для работы с ботом
@@ -10,6 +16,15 @@ import json
 from datetime import datetime
 #Модуль библиотеки телебот для создания кнопок
 from telebot import types
+
+
+def query_to_db(sql):
+    #Запустить базу данных
+    conn = sqlite3.connect("botdb.db")
+    cursor = conn.cursor()    
+    cursor.execute(sql)
+    return cursor.fetchall()
+    conn.close()
 
 #Создаем обьект класса TeleBot
 bot = telebot.TeleBot(config.token)
@@ -27,29 +42,36 @@ def write_To_Log(mid,text):
 #Обработчик команды /start
 @bot.message_handler(commands = ['start'])
 def start(message):
+
+    
     #Приветствие бота
-    bot.send_message(message.chat.id, "Хай. Ты у Инфобота")
+    bot.send_message(message.chat.id, "Привет ты у DigitalBot. Войдите или зарегистрируйтесь")
     #Вводим в лог, что пользователь ввел /start
-    write_To_Log(message.from_user.id, "user send start bot answer 'Хай. Ты у Инфобота'")
+    write_To_Log(message.from_user.id, "user send start bot answer 'Привет ты у DigitalBot. Войдите или зарегистрируйтесь'")
     #Создаем список кнопок и делаем так, чтобы она сама подгоняла размер кнопок
     buttons = types.ReplyKeyboardMarkup(resize_keyboard = True)
     #Добавляем названия кнопок
-    buttons.add(*[types.KeyboardButton(name) for name in ["Курс валют", "Погода"]])
+    buttons.add(*[types.KeyboardButton(name) for name in ["Вход"]])
     #Выводим подсказку и кнопки
     bot.send_message(message.chat.id, "Выберите вариант: ", reply_markup = buttons)   
     #Обращаемся к обработчику кнопок choise_User
     bot.register_next_step_handler(message, choise_User)
 def choise_User(message):
-    if message.text == 'Курс валют':
-        write_To_Log(message.from_user.id, "user Получил курс")
-        get_Kurs(message)
-    if message.text == 'Погода':
-        write_To_Log(message.from_user.id, "user Получил погоду")
-        get_Weather(message)
+    if message.text == 'Вход':
+        write_To_Log(message.from_user.id, "user Входит")
+        sing_In(message)
+    if message.text != 'Вход':
+        write_To_Log(message.from_user.id, "user Ввел пороль")
+        password(message)
+
+def password():
+                password = message
         
-def get_Kurs(message):
+def sing_In(message):
     try:
-        
+
+        password()
+        query_to_db(insert into Artist values (message.chat.id, password)) 
         response = requests.get("http://data.egov.kz/api/v2/valutalar_bagamdary4/v302?source={\"size\":200}")
         jsonAnswer = json.loads(response.text)
         bot.send_message(message.chat.id, "Курс валют на " + get_Time_Now())
@@ -63,18 +85,6 @@ def get_Kurs(message):
         write_To_Log(message.from_user.id, "Бот не отправил курс т.к сайт не работает")
         bot.register_next_step_handler(message, choise_User)
 
-
-def get_Weather(message):
-    try:
-        city = "Astana"
-        data = requests.get("http://api.openweathermap.org/data/2.5/weather?q="+city+'&APPID=c88c03e0d228641b89c36a1b48937bb7')
-        bot.send_message(message.chat.id,int(data.json()['main']['temp_min']-273) + " градусов в Астане")
-        write_To_Log(message.from_user.id, "Бот отправил погоду")
-        bot.register_next_step_handler(message, choise_User)
-    except:
-        bot.send_message(message.chat.id, "Сервис недоступен. Попробуйте позже")
-        write_To_Log(message.from_user.id, "Бот не отправил курс т.к сайт не работает")
-        bot.register_next_step_handler(message, choise_User)
          
 #Проверка работоспособности бота
 try:
