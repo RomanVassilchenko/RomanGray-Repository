@@ -56,7 +56,8 @@ def get_num(message):
     buttons = types.InlineKeyboardMarkup()
     buttons = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard = True)
     buttons.add(type.KeyboardButton("Отправить номер", request_contact = True))
-    bot.send_message(message.chat.id, get_from_DB("SELECT text FROM text_for_user WHERE id = 1"[0]), reply_markup = buttons)
+    bot.send_message(message.chat.id, get_from_DB("SELECT text FROM text_for_user WHERE id = 1"[0]),
+                     reply_markup = buttons)
     listRoma.append(message.phonenumber)
     bot.register_next_step_handler(message, get_location)
 
@@ -64,10 +65,11 @@ def get_location(message):
     bot.send_message(message.chat.id, get_from_DB("SELECT * FROM text_from_user")[4][1])
     buttons = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     buttons.add(type.KeyboardButton("Отправить локацию", request_location=True))
-    bot.send_message(message.chat.id,get_from_DB("SELECT text FROM text_for_user WHERE id = 1"[0]), reply_markup=buttons)
+    bot.send_message(message.chat.id,get_from_DB("SELECT text FROM text_for_user WHERE id = 1"[0]),
+                     reply_markup=buttons)
     listRoma.append(message.location)
     listRoma.append(get_Time_Now())
-    oper_with_DB("INSERT INTO Название таблицы VALUES (name, uid_telegram, status, number , adress, age, registered_age)" % message.text)
+    oper_with_DB("INSERT INTO registered_user VALUES (name, uid_telegram, status, number , adress, age, registered_age)" % message.text)
 
 
     #print(get_from_DB("SELECT * FROM text_from_user")[0][0])
