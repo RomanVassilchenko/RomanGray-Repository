@@ -1,0 +1,4 @@
+19.05.2018 17:34:38 478427115 user write /info and status = user
+19.05.2018 17:34:38 478427115 user write /info and status = Admin
+19.05.2018 18:10:16 478427115 user write /info and status = 0
+19.05.2018 18:10:16 478427115 user write /info and status = Admin

@@ -6,7 +6,7 @@ import wikipedia
 import math
 from datetime import datetime
 from telebot import types
-
+# write_To_Log(message.from_user.id, "user write")
 def get_Time_Now():
     return datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M:%S")
 
