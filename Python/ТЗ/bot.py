@@ -176,6 +176,8 @@ def UserButtonChoose(message):
         Pits(message)
     if message.text == "Неисправное освещение":
         DefenciveLightning(message)
+    if message.text == "Показать все категории":
+        ShowAllCategory(message)
 
 def adminPasswordCheck(message):
     if  str(cursorConnectR("SELECT Text FROM AdminText WHERE Name = Password")[0][0]) == message.text :
@@ -193,7 +195,7 @@ def adminRights(message):
         "SELECT Text FROM Status WHERE Name = 'admin'"))
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True,
                                          one_time_keyboard=True)
-    keyboard.add(*[types.KeyboardButton(name) for name in ["Ключевые слова", "Изменить 'Вопросы'","Редактировать текст","События","Участники группы","Вакансии"]])
+    keyboard.add(*[types.KeyboardButton(name) for name in ["Ключевые слова", "Изменить 'Вопросы'","Редактировать текст","События","Участники группы","Вакансии" , "О проекте", "Стать пользователем"]])
     bot.send_message(message.chat.id,
                      "Для выбора функции нажмите на кнопку",
                      reply_markup=keyboard)
@@ -218,7 +220,10 @@ def AdminButtonChoose(message):
 
     if message.text == "Вакансии":
         Vacancies(message)
-
+    if message.text == "О проекте":
+        AdminAboutProject(message)
+    if message.text == "Стать пользователем":
+        BecomeUser(message)
 def ChangeQuestions (message):
     global results
     global myArray
@@ -285,6 +290,21 @@ def AboutProject(message):
     btn_my_site= types.InlineKeyboardButton(text='читать далее...', url='http://telegra.ph/Telegraph-EHto-05-19')
     markup.add(btn_my_site)
     bot.send_message(message.chat.id, results, reply_markup = markup)
+    bot.register_next_step_handler(message, UserButtonChoose)
+
+def AdminAboutProject(message):
+    print("AdminAboutProject")
+    bot.send_message(message.chat.id,"Изменяемый текст:")
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM TextForUser WHERE Id = 2"))
+    bot.register_next_step_handler(message, AdminAboutProject2)
+
+    
+def AdminAboutProject2(message):
+    print("AdminAboutProject")
+    cursorConnectU("TextForUser","Text",message.text,"Id",2)
+    bot.send_message(message.chat.id,"Текст изменен!")
+    bot.register_next_step_handler(message, AdminButtonChoose)
     
 def SendMessage(message):
     print("Send Message")
@@ -362,6 +382,13 @@ def RegisterComments(message):
     Complaints = tuple(Complaints)
     cursorConnectW("Complaints", Complaints)
 
+def ShowAllCategory(message):
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM Category"))
+def BecomeUser(message):
+    print("Стать пользователем")
+    cursorConnectU("Answers","Status",1,"Id",message.chat.id)
+    bot.send_message(message.chat.id, "Вы стали пользователем! Чтобы начать напишите /start")
 
 if __name__=='__main__':
     bot.polling(none_stop = True)
