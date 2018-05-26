@@ -10,6 +10,7 @@ bot = telebot.TeleBot(config.token)
 _db_Number_of_User = 0
 _db_User_Status = 0
 myArray =[_db_Number_of_User,_db_User_Status]
+Complaints = [_db_Number_of_User,_db_User_Status]
 print(myArray)
 WaitMode = 0
 UserMode = 1
@@ -89,11 +90,14 @@ def questioning(message):
             break
     else:
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True,one_time_keyboard=True)
+        results = cursorConnectR("SELECT Text FROM name_buttons WHERE id = 1")
         keyboard.add(*[types.KeyboardButton(name) for name in["Отправить"]])
         bot.send_message(message.chat.id, "Если все данные верны нажмите 'Отправить', в противном случае введите повторно данные заново нажав на /start", reply_markup=keyboard)
         myArray[_db_Number_of_User]=message.from_user.id
         myArray = tuple(myArray)
         bot.register_next_step_handler(message,ConfirmationOfRegistration)
+
+
     
 def questoningStep2(message):
     
@@ -165,6 +169,13 @@ def UserButtonChoose(message):
 
     if message.text == "Обратная связь":
         Feedback(message)
+
+    if message.text == "Грязь и мусор":
+        DirtAndTrash(message)
+    if message.text == "Ямы":
+        Pits(message)
+    if message.text == "Неисправное освещение":
+        DefenciveLightning(message)
 
 def adminPasswordCheck(message):
     if  str(cursorConnectR("SELECT Text FROM AdminText WHERE Name = Password")[0][0]) == message.text :
@@ -254,13 +265,19 @@ def ChangeText(message):
 
 def Developments(message):
     print("Developments")
-
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM TextForUser WHERE Id = 5"))
+    bot.register_next_step_handler(message, UserButtonChoose)
 def GroupMembers(message):
     print("Group Members")
-
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM TextForUser WHERE Id = 5"))
+    bot.register_next_step_handler(message, UserButtonChoose)
 def Vacancies(message):
     print("Vacancies")
-
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM TextForUser WHERE Id = 5"))
+    bot.register_next_step_handler(message, UserButtonChoose)
 def AboutProject(message):
     print("About Message")
     results = cursorConnectR("SELECT Text FROM TextForUser WHERE id = 2")
@@ -271,6 +288,16 @@ def AboutProject(message):
     
 def SendMessage(message):
     print("Send Message")
+    bot.send_message(message.chat.id, cursorConnectR(
+        "SELECT Text FROM TextForUser WHERE Id = 4"))
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True,
+                                         one_time_keyboard=True)
+    keyboard.add(*[types.KeyboardButton(name) for name in
+                   ["Грязь и мусор", "Ямы", "Неисправное освещение", "Показать все категории", "Поменять избранные категории"]])
+    bot.send_message(message.chat.id,
+                     "Для выбора функции нажмите на кнопку",
+                     reply_markup=keyboard)
+    bot.register_next_step_handler(message, UserButtonChoose)
 
 def MyTreatment(message):
     print("My Treatment")
@@ -283,7 +310,59 @@ def Feedback(message):
     # Изменить ссылку на обратную связь
     markup.add(btn_my_site)
     bot.send_message(message.chat.id, results, reply_markup = markup)
-    
+def DirtAndTrash(message):
+    print("DirtAndTrash")
+    global Complaints
+    Complaints = list(Complaints)
+    print(Complaints)
+    Complaints.clear()
+    Complaints.append(message.chat.id)
+    Complaints.append("Грязь и мусор")
+    bot.send_message(message.chat.id,
+                     "Введите адрес")
+    bot.register_next_step_handler(message, RegisterAdress)
+
+def Pits(message):
+    print("Pits")
+    global Complaints
+    Complaints = list(Complaints)
+    Complaints.append(message.chat.id)
+    Complaints.append("Ямы")
+    bot.send_message(message.chat.id,
+                     "Введите адрес")
+    bot.register_next_step_handler(message, RegisterAdress)
+
+
+def DefectiveLighting(message):
+    print("DefectiveLighting")
+    global Complaints
+    Complaints = list(Complaints)
+    Complaints.append(message.chat.id)
+    Complaints.append("Неисправное освещение")
+    bot.send_message(message.chat.id,
+                     "Введите адрес")
+    bot.register_next_step_handler(message, RegisterAdress)
+
+
+def RegisterAdress(message):
+    global  Complaints
+    Complaints = list(Complaints)
+    Complaints.append(message.text)
+    # Добавить фото
+    Complaints.append(1)
+    bot.send_message(message.chat.id,
+                     "Напишите комментарий")
+    bot.register_next_step_handler(message, RegisterComments)
+
+def RegisterComments(message):
+    global Complaints
+    Complaints = list(Complaints)
+    Complaints.append(message.text)
+    Complaints.append(0)
+    Complaints = tuple(Complaints)
+    cursorConnectW("Complaints", Complaints)
+
+
 if __name__=='__main__':
     bot.polling(none_stop = True)
 
