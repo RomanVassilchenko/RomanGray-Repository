@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace ProjectD
 {
-    public partial class Form1 : Form
+    public partial class SystemConverter : Form
     {
-        public Form1()
+        public SystemConverter()
         {
             InitializeComponent();
         }
@@ -20,43 +20,63 @@ namespace ProjectD
 
         private void convert_Click( object sender, EventArgs e )
         {
+            string OutText = "", InText = "";
+            if (comboBoxIn.SelectedIndex == 0) { InText = "Двоичное число"; }
+            if (comboBoxIn.SelectedIndex == 1) { InText = "Троичное число"; }
+            if (comboBoxIn.SelectedIndex == 2) { InText = "Восьмиричное число"; }
+            if (comboBoxIn.SelectedIndex == 3) { InText = "Десятиричное число"; }
+            if (comboBoxIn.SelectedIndex == 4) { InText = "Двенадцатиричное число"; }
+            if (comboBoxIn.SelectedIndex == 5) { InText = "Шестнадцатиричное число"; }
+
+            if (comboBoxOut.SelectedIndex == 0) { OutText = "Двоичное число"; }
+            if (comboBoxOut.SelectedIndex == 1) { OutText = "Троичное число"; }
+            if (comboBoxOut.SelectedIndex == 2) { OutText = "Восьмиричное число"; }
+            if (comboBoxOut.SelectedIndex == 3) { OutText = "Десятиричное число"; }
+            if (comboBoxOut.SelectedIndex == 4) { OutText = "Двенадцатиричное число"; }
+            if (comboBoxOut.SelectedIndex == 5) { OutText = "Шестнадцатиричное число"; }
             //Двоичная
-            if (comboBoxIn.SelectedIndex == 0)
+            if (comboBoxOut.SelectedIndex == 0)
             {
                 if (comboBoxOut.SelectedIndex == 0)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     textBoxOut.Text = "" + Num;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Num + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 2));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
             //Троичная
@@ -67,35 +87,41 @@ namespace ProjectD
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     textBoxOut.Text = "" + Num;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Num + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 3));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
             //Восьмеричная
@@ -106,35 +132,41 @@ namespace ProjectD
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     textBoxOut.Text = "" + Num;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Num + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 8));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
             //Десятиричная
@@ -145,34 +177,40 @@ namespace ProjectD
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 10));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 10));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 10));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     textBoxOut.Text = "" + textBoxIn.Text;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + textBoxIn.Text + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 10));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 10));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
             //Двенадцатиричная
@@ -183,35 +221,41 @@ namespace ProjectD
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     textBoxOut.Text = "" + Num;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Num + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 12));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
             //Шестнадцатиричная
@@ -222,35 +266,41 @@ namespace ProjectD
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     string Final = ToNotDecimal(Num, 2);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 1)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     string Final = ToNotDecimal(Num, 3);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 2)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     string Final = ToNotDecimal(Num, 8);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 3)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     textBoxOut.Text = "" + Num;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Num + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 4)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     string Final = ToNotDecimal(Num, 12);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
                 if (comboBoxOut.SelectedIndex == 5)
                 {
                     string Num = Convert.ToString(ToDecimal(textBoxIn.Text, 16));
                     string Final = ToNotDecimal(Num, 16);
                     textBoxOut.Text = "" + Final;
+                    history.Text += (DateTime.Now + " " + InText + textBoxIn.Text + " перевелся в " + OutText + " " + Final + "\n");
                 }
             }
         }

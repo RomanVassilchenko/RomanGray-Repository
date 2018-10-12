@@ -12,9 +12,9 @@ C:\Users\mrrom\source\repos\ProjectD\ProjectD\bin\Debug\ProjectD.exe.config
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\bin\Debug\ProjectD.exe
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\bin\Debug\ProjectD.pdb
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.csprojAssemblyReference.cache
-C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.Form1.resources
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.Properties.Resources.resources
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.csproj.GenerateResource.cache
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.csproj.CoreCompileInputs.cache
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.exe
 C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.pdb
+C:\Users\mrrom\source\repos\ProjectD\ProjectD\obj\Debug\ProjectD.SystemConverter.resources
