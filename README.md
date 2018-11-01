@@ -1,2 +1,2 @@
 # RomanGray-Repository
-This repository is Roman Gray. Here are his projects. More you can see in the repository itself
+This repository is Roman Vassilchenko. Here are his projects. More you can see in the repository itself
